@@ -1,10 +1,24 @@
 import { render, screen } from '@testing-library/react'
-import Table from './Table'
+import Table from './Table';
 
 describe('Table', () => {
-    render(<Table />)
+    const mockData = [
+        {
+            tech: 'React',
+            tipo: 'Frontend'
+        },
+        {
+            tech: 'Angular',
+            tipo: 'Frontend'
+        },
+        {
+            tech: 'Node',
+            tipo: 'Backend'
+        }
+    ]
     it('Deve exibir os ítens na tabela', () => {
-        expect(screen.getByText('React')).toBeInTheDocument
-        expect(screen.getByText('Frontend')).toBeInTheDocument
+        render(<Table data={mockData}/>)
+
+        expect(screen.getAllByRole('row')).toHaveLength(1 + mockData.length)
     })
 })
